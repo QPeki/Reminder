@@ -38,6 +38,10 @@ body {
   font-size: 18px;
 }
 
+.container  .cancel-btn {
+   margin-right: 10px;
+}
+
 .add-btn-area {
   margin-top: 0;
   padding: 0 25px;
