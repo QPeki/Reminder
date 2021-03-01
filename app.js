@@ -168,6 +168,6 @@ function events() {
 
       cancelBtn.addEventListener('click', () => {
         cancelAlarm(id);
-      });
+      }); 
   })
 }
