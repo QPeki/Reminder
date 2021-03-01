@@ -74,10 +74,10 @@ let close = document.getElementsByClassName("close");
   }
 }
 
-
 function initAlarm(index) {
   sound.loop = true;
   sound.play();
+
   let alarmBtn = document.querySelector(`[data-alarm-id='${index}']`);
   let cancelBtn = document.querySelector(`[data-cancel-id='${index}']`);
   alarmBtn.style.display = 'none';
@@ -96,37 +96,33 @@ function addElement() {
   events();
 }
 
-function setAlarm(index) {
-  // const nowTime = document.querySelector(`[data-date-id='${id}']`);
-  const inputTime =  document.querySelector('.alarm-time');
-  time = parseInt(inputTime.value);
+function setAlarm(id) {
+  const nowTime = document.querySelector(`[data-date-id='${id}']`);
 
-  //valueAsNumber
-
-  if (isNaN(time)) {
-    alert ('Invalid Input');
-    return;
-  }
+    let time = nowTime.valueAsNumber;
+    if (isNaN(time)) {
+        alert('Invalid Input');
+        return;
+    }
 
   const alarm = new Date(time);
   const alarmTime = new Date(alarm.getUTCFullYear(), alarm.getUTCMonth(), alarm.getUTCDate(), alarm.getUTCHours(), alarm.getUTCMinutes(), alarm.getUTCSeconds());
 
-  alarms[index]['alarm_at'] = alarmTime;
+  alarms[id]['alarm_at'] = alarmTime;
   
 }
 
 function startTimer() {
   timer = setInterval(function () {
-    alarms.forEach((item, index) => {
-      if(!item.alarm_at) {
-        return;
+    alarms.forEach(function (item, index) {
+      if (!item.alarm_at) {
+          return;
       }
-
       let alarm = new Date(item.alarm_at);
       let current = new Date();
       if (current > alarm) {
-        alarms[index]['alarm_at'] = null;
-        initAlarm(index)
+          alarms[index]['alarm_at'] = null
+          initAlarm(index)
       }
     });
   }, 3000)
@@ -134,6 +130,7 @@ function startTimer() {
 
 function cancelAlarm(index) {
   sound.pause();
+
   let alarmBtn = document.querySelector(`[data-alarm-id='${index}']`);
   let cancelBtn = document.querySelector(`[data-cancel-id='${index}']`);
   alarmBtn.style.display = '';
